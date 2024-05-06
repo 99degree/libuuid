@@ -26,6 +26,7 @@ $(OBJS) : $(SRCS)
 
 all: builddir $(OBJS)
 	$(CC) -shared -o libuuid.so $(addprefix $(BUILD_DIR)/,$(OBJS))
+	$(AR) -rcs libuuid.a $(addprefix $(BUILD_DIR)/,$(OBJS))
 	
 test: all
 	$(CC) $(CFLAGS) src/test.c -o test -L$(shell pwd)/ -luuid
@@ -34,4 +35,4 @@ builddir:
 	-mkdir $(BUILD_DIR)
 	
 clean:
-	-rm -rf $(BUILD_DIR) libuuid.so test
+	-rm -rf $(BUILD_DIR) libuuid.so test libuuid.a
